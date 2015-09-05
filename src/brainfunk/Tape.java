@@ -4,24 +4,21 @@ public class Tape {
 	private int[] tape = new int[30_000];
 	private int pointer = 0;
 
-	private void throwIndexException() throws IndexOutOfBoundsException {
-		throw new IndexOutOfBoundsException("Tape value at " + pointer + " is negative.");
-	}
-
-	public void perform(Action action) {
+	public void perform(Action action) throws Exception {
 		if (action == Action.INCREMENT) {
 			++tape[pointer];
 		} else if (action == Action.DECREMENT) {
-			if (tape[pointer] < 1)
-				throwIndexException();
-			else
-				--tape[pointer];
-		} else if (action == Action.LEFT)
-			--pointer;
-		else if (action == Action.RIGHT)
-			++pointer;
-		else
+			if (tape[pointer] - 1 < 0) throw new Exception("Cannot decrement a cell with value 0.");
+			else --tape[pointer];
+		} else if (action == Action.LEFT) {
+			if (pointer - 1 < 0) throw new Exception("Pointer is at left of tape.");
+			else --pointer;
+		} else if (action == Action.RIGHT) {
+			if (pointer + 1 >= tape.length) throw new Exception("Pointer is at right of tape.");
+			else ++pointer;
+		} else {
 			throw new IllegalArgumentException(String.format("\"%s\" cannot be performed.", action.toString()));
+		}
 	}
 
 	public int getValue() {
@@ -49,8 +46,7 @@ public class Tape {
 		// Find the end of the content
 		int index = 0;
 		for (int i = 0; i < tape.length; ++i) {
-			if (tape[i] != 0)
-				index = i + 1;
+			if (tape[i] != 0) index = i + 1;
 		}
 
 		index = (int) Math.max(index, 10);
