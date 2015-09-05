@@ -34,27 +34,28 @@ public class Tape {
 	}
 
 	public String toString() {
-		String svaret = "";
-
-		for (int i = 0; i < 2 + 4 * pointer; ++i) {
-			svaret += " ";
-		}
-
-		svaret += "*";
-
-		svaret += "\n|";
+		String content = "|";
 		// Find the end of the content
-		int index = 0;
+		int indexOfEnd = 0;
 		for (int i = 0; i < tape.length; ++i) {
-			if (tape[i] != 0) index = i + 1;
+			if (tape[i] != 0) indexOfEnd = i + 1;
 		}
 
-		index = (int) Math.max(index, 10);
+		indexOfEnd = (int) Math.max(indexOfEnd, 10);
 
-		for (int i = 0; i < index; ++i) {
-			svaret += String.format(" %d |", tape[i]);
+		
+		int indexForPointerString = 0;
+		for (int i = 0; i < indexOfEnd; ++i) {
+			if (i == pointer) indexForPointerString = content.length() + 1;
+			content += String.format(" %d |", tape[i]);
 		}
 
-		return svaret;
+		String pointerString = "";
+		for (int i = 0; i < indexForPointerString; ++i) {
+			pointerString += " ";
+		}
+		pointerString += "#";
+		
+		return pointerString + "\n" + content;
 	}
 }
