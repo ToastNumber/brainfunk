@@ -5,12 +5,12 @@ import java.util.Stack;
 public class Interpreter {
 	private String code;
 	private Scanner codeScanner;
-	
+
 	private String input;
 	private Scanner inputScanner;
-	
+
 	private String output;
-	
+
 	private Stack<Integer> loopStack = new Stack<>();
 
 	public Interpreter(String code) {
@@ -36,30 +36,30 @@ public class Interpreter {
 		else if (stringAction.equals("<")) return Action.LEFT;
 		else if (stringAction.equals("[")) return Action.LOOP_START;
 		else if (stringAction.equals("]")) return Action.LOOP_END;
-		else
-			throw new IllegalArgumentException("No associated action found.");
+		else throw new IllegalArgumentException("No associated action found.");
 	}
 
 	private void perform(Action action, Tape tape) throws Exception {
 		if (action == Action.INPUT) {
 			try {
-			tape.assign(inputScanner.nextLetter());
+				tape.assign(inputScanner.nextLetter());
 			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new Exception("Invalid input.");
 			}
-		}
-		else if (action == Action.OUTPUT) this.output += (char) tape.getValue();
-		else if (action == Action.LOOP_START) this.loopStack.add(codeScanner.index());
-		else if (action == Action.LOOP_END) {
+		} else if (action == Action.OUTPUT) {
+			this.output += (char) tape.getValue();
+		} else if (action == Action.LOOP_START) {
+			this.loopStack.add(codeScanner.index());
+		} else if (action == Action.LOOP_END) {
 			if (tape.getValue() == 0) loopStack.pop();
 			else codeScanner.jump(loopStack.peek());
-		} else
-			tape.perform(action);
+		} else tape.perform(action);
 	}
 
 	/**
 	 * Calling this method resets the tape and runs the program
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public void run(boolean showTape, boolean showCode) throws Exception {
 		Tape tape = new Tape();
@@ -68,12 +68,11 @@ public class Interpreter {
 		codeScanner = new Scanner(code);
 		loopStack.clear();
 
-		if (showTape) System.out.println(tape + "\n---------------------------------------------------------\n");
 		while (codeScanner.hasNext()) {
 			Action action = getAction(codeScanner.nextLetter());
 			perform(action, tape);
-			
-			if (showCode) System.out.println(codeScanner + "\n");
+
+			if (showCode) System.out.println(codeScanner);
 			if (showTape) System.out.println(tape + "\n");
 		}
 
