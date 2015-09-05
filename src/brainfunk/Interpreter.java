@@ -36,7 +36,7 @@ public class Interpreter {
 		else if (stringAction.equals("<")) return Action.LEFT;
 		else if (stringAction.equals("[")) return Action.LOOP_START;
 		else if (stringAction.equals("]")) return Action.LOOP_END;
-		else throw new IllegalArgumentException("No associated action found.");
+		else throw new IllegalArgumentException("No associated action found for \"" + action + "\"");
 	}
 
 	private void perform(Action action, Tape tape) throws Exception {
@@ -61,7 +61,7 @@ public class Interpreter {
 	 * 
 	 * @throws Exception
 	 */
-	public void run(boolean showTape, boolean showCode) throws Exception {
+	public void run(boolean show) throws Exception {
 		Tape tape = new Tape();
 		output = "";
 		inputScanner = new Scanner(input);
@@ -69,11 +69,9 @@ public class Interpreter {
 		loopStack.clear();
 
 		while (codeScanner.hasNext()) {
+			if (show) System.out.println(tape + "\n");
 			Action action = getAction(codeScanner.nextLetter());
 			perform(action, tape);
-
-			if (showCode) System.out.println(codeScanner);
-			if (showTape) System.out.println(tape + "\n");
 		}
 
 		System.out.println("OUTPUT: " + this.output);
