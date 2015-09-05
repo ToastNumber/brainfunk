@@ -6,7 +6,7 @@ public class Parser {
 		
 	}
 	
-	public static String[] getCharacters(String code) {
-		return code.split("");
+	public static char[] getCharacters(String code) {
+		return code.toCharArray();
 	}
 }
