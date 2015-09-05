@@ -11,8 +11,8 @@ public class BrainFunk {
 		boolean trace = false;
 		String code = "";
 		
-		if (args.length != 2) {
-			System.err.println("Two arguments expected - TRACE FILENAME");
+		if (args.length < 2) {
+			System.err.println("More arguments expected - TRACE FILENAME [INPUT]");
 		} else {
 			if (args[0].toLowerCase().equals("true")) trace = true;
 			else if (args[0].toLowerCase().equals("false")) trace = false;
@@ -31,8 +31,15 @@ public class BrainFunk {
 				reader.close();
 				
 				code = Parser.removeUnneededCharacters(code);
-				Interpreter printABCD = new Interpreter(code);
-				printABCD.run(trace);
+
+				Interpreter interpreter;
+				if (args.length == 3) {
+					interpreter = new Interpreter(code, args[2]);
+				} else {
+					interpreter = new Interpreter(code);
+				}
+				
+				interpreter.run(trace);
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 			} catch (Exception e) {
