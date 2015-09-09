@@ -12,7 +12,7 @@ public class BrainFunk {
 		String code = "";
 		
 		if (args.length < 2) {
-			System.err.println("More arguments expected - TRACE FILENAME [INPUT]");
+			System.err.println("More arguments expected - (true|false) FILENAME [INPUT]");
 		} else {
 			if (args[0].toLowerCase().equals("true")) trace = true;
 			else if (args[0].toLowerCase().equals("false")) trace = false;
