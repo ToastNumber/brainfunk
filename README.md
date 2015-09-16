@@ -9,4 +9,4 @@ Run your program using the command `java brainfunk.BrainFunk (true|false) FILENA
 
 ##Automated Usage
 - `compile.bat` automatically compiles the source files into a bin folder.
-- `run.bat` automatically runs the program, and asks for the path for the file to interpret, and the path for the input.
+- `run.bat` automatically runs the program, and asks for the path for the file to interpret, and the path for the input. It does not show the trace. The input can be left blank by pressing `ENTER`.

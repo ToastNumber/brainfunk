@@ -1,7 +1,7 @@
 @ECHO off
 ECHO ---BrainFunk---
 ECHO.
-@IF NOT EXIST "bin" GOTO rid 
+@IF NOT EXIST "bin" GOTO setup
 
 :make
 	ECHO Compiling files.
@@ -10,7 +10,7 @@ ECHO.
 	pause
 	exit
 
-:rid
+:setup
 	ECHO Creating bin directory.
 	MKDIR "bin"
 	GOTO make
