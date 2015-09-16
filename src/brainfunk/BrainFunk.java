@@ -32,18 +32,20 @@ public class BrainFunk {
 				
 				//Now read the input
 				String input = "";
-				reader = new FileReader(args[2]);
-				bf = new BufferedReader(reader);
-				while ((c = bf.read()) != -1) {
-					input += (char) c;
+				if (!args[2].trim().isEmpty()) {
+					reader = new FileReader(args[2]);
+					bf = new BufferedReader(reader);
+					while ((c = bf.read()) != -1) {
+						input += (char) c;
+					}
+					bf.close();
+					reader.close();
 				}
-				bf.close();
-				reader.close();
 				
 				code = Parser.removeUnneededCharacters(code);
 				
 				Interpreter interpreter;
-				if (args.length == 3) {
+				if (args.length == 3 && !input.trim().isEmpty()) {
 					interpreter = new Interpreter(code, input);
 				} else {
 					interpreter = new Interpreter(code);
