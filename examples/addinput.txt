@@ -1,0 +1,1 @@
+01 These characters will be ignored since only two characters are read. 0 = 48, 1 = 49, so 48 + 49 = 97 = 'a'

@@ -23,3 +23,8 @@ brainfunk/
 	.gitignore
 	README.md
 ```
+
+##Automated
+- `compile.bat` automatically compiles the source files into a bin folder.
+- `run.bat` automatically runs the program, and asks for the path for the file to interpret, and the path for the input.
+
