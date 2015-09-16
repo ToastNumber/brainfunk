@@ -13,6 +13,8 @@ public class BrainFunk {
 		
 		if (args.length < 2) {
 			System.err.println("More arguments expected - (true|false) FILENAME [INPUT]");
+		} else if (args.length > 3) {
+			System.err.println("Too many arguments.");
 		} else {
 			if (args[0].toLowerCase().equals("true")) trace = true;
 			else if (args[0].toLowerCase().equals("false")) trace = false;
@@ -30,9 +32,10 @@ public class BrainFunk {
 				bf.close();
 				reader.close();
 				
-				//Now read the input
+				//Now read the input (if there is one)
 				String input = "";
-				if (!args[2].trim().isEmpty()) {
+				
+				if (args.length == 3) {
 					reader = new FileReader(args[2]);
 					bf = new BufferedReader(reader);
 					while ((c = bf.read()) != -1) {
@@ -45,7 +48,7 @@ public class BrainFunk {
 				code = Parser.removeUnneededCharacters(code);
 				
 				Interpreter interpreter;
-				if (args.length == 3 && !input.trim().isEmpty()) {
+				if (args.length == 3) {
 					interpreter = new Interpreter(code, input);
 				} else {
 					interpreter = new Interpreter(code);
