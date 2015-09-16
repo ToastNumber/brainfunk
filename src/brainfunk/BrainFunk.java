@@ -30,11 +30,21 @@ public class BrainFunk {
 				bf.close();
 				reader.close();
 				
+				//Now read the input
+				String input = "";
+				reader = new FileReader(args[2]);
+				bf = new BufferedReader(reader);
+				while ((c = bf.read()) != -1) {
+					input += (char) c;
+				}
+				bf.close();
+				reader.close();
+				
 				code = Parser.removeUnneededCharacters(code);
-
+				
 				Interpreter interpreter;
 				if (args.length == 3) {
-					interpreter = new Interpreter(code, args[2]);
+					interpreter = new Interpreter(code, input);
 				} else {
 					interpreter = new Interpreter(code);
 				}
