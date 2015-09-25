@@ -1,5 +1,5 @@
 #BrainFunk
-A command line interface for interpreting the esoteric language BrainF%$k.
+A command-line interface for interpreting the esoteric language BrainF%$k.
 
 ##Usage
 Run your program using the command `java brainfunk.BrainFunk (true|false) FILENAME [INPUT]`
