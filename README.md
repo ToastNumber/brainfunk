@@ -1,4 +1,4 @@
-#BrainFunk
+#BrainFunk [![Build Status](https://travis-ci.org/ToastNumber/brainfunk.svg?branch=master)](https://travis-ci.org/ToastNumber/brainfunk)
 A command-line interface for interpreting the esoteric language BrainF%$k.
 
 ##Usage
